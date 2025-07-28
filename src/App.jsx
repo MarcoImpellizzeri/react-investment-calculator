@@ -1,7 +1,7 @@
 import Header from './components/Ui/Header.jsx'
 import UserInput from './components/UserInput.jsx'
 import { calculateInvestmentResults } from './util/investment'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import ResultTable from './components/ResultTable.jsx'
 
 function App() {
