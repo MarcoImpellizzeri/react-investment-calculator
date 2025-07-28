@@ -17,10 +17,9 @@ function App() {
   function handleInputChange(e) {
     const { name, value } = e.target
 
-    // clone + modifica
     const updatedForm = {
       ...form,
-      [name]: +value // converti in numero se serve
+      [name]: +value
     }
 
     setForm(updatedForm)
