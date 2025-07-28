@@ -1,24 +1,32 @@
 import Header from './components/Ui/Header.jsx'
 import UserInput from './components/UserInput.jsx'
 import { calculateInvestmentResults } from './util/investment'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import ResultTable from './components/ResultTable.jsx'
 
 function App() {
+  const [results, setResults] = useState([])
+
   const [form, setForm] = useState({
     initialInvestment: 0,
     annualInvestment: 0,
     expectedReturn: 0,
-    duration: 0
+    duration: 1
   })
 
   function handleInputChange(e) {
-    setForm({
-      ...form,
-      [e.target.name]: e.target.value
-    })
+    const { name, value } = e.target
 
-    calculateInvestmentResults(form)
+    // clone + modifica
+    const updatedForm = {
+      ...form,
+      [name]: +value // converti in numero se serve
+    }
+
+    setForm(updatedForm)
+    calculateInvestmentResults(updatedForm)
+    const calculatedResults = calculateInvestmentResults(updatedForm)
+    setResults(calculatedResults)
   }
 
   return (
@@ -52,7 +60,7 @@ function App() {
           />
         </div>
       </div>
-      <ResultTable />
+      <ResultTable data={results}/>
     </main>
   )
 }
